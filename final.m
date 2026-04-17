@@ -472,7 +472,7 @@ function sol = solve_with_shock(x, AR, Pb_P0, P_0, T_0, gamma, R)
     end
     shock_idx = max(2, min(shock_idx, N-1));
 
-    % --- Build flow field ---
+    % Build flow field
     M1_shock = M_sup(shock_idx);
     [M2_shock, ~, ~, ~, P02_P01_shock] = normal_shock(M1_shock, gamma);
 
@@ -702,9 +702,7 @@ function plot_results(results_conical, results_bell, ...
     r_inlet = 2.0 * r_t;
     L_conv  = 1.5 * r_t;
 
-    % =================================================================
     % Figures 1-2: C_F contour maps
-    % =================================================================
     for g = 1:2
         res = all_results{g};
         [P1, P2] = meshgrid(res.param1_vec, res.param2_vec);
@@ -737,9 +735,7 @@ function plot_results(results_conical, results_bell, ...
         set(gca,'FontName','Arial');
     end
 
-    % =================================================================
     % Figures 3-4: Pe/Pinf contour maps
-    % =================================================================
     for g = 1:2
         res = all_results{g};
         [P1, P2] = meshgrid(res.param1_vec, res.param2_vec);
@@ -769,9 +765,7 @@ function plot_results(results_conical, results_bell, ...
         set(gca,'FontName','Arial');
     end
 
-    % =================================================================
     % Figures 5-6: P(x), T(x), rho(x) profiles
-    % =================================================================
     for g = 1:2
         res = all_results{g};
         if strcmpi(res.geom_type,'conical')
@@ -806,9 +800,7 @@ function plot_results(results_conical, results_bell, ...
         grid on; set(gca,'FontName','Arial');
     end
 
-    % =================================================================
     % Figures 7-8: Individual nozzle geometry (full, with converging)
-    % =================================================================
     x_conv = linspace(-L_conv, 0, 50);
     r_conv = (r_inlet+r_t)/2 + (r_inlet-r_t)/2 .* cos(pi*(x_conv+L_conv)/L_conv);
 
@@ -840,9 +832,7 @@ function plot_results(results_conical, results_bell, ...
         grid on; axis equal; set(gca,'FontName','Arial');
     end
 
-    % =================================================================
     % Figure 9: Bar chart comparison
-    % =================================================================
     figure('Color','w','Position',[100 100 650 500]);
     metrics = {'C_F','M_e','P_e/P_\infty','A_e/A_t'};
     vals = [results_conical.ref_CF,      results_bell.ref_CF; ...
